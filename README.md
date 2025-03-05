@@ -68,7 +68,7 @@ The structured JSON output from Rufus is designed for seamless integration into 
    - Open Command Prompt or PowerShell.
    - Run the following commands:
      ```batch
-     git clone https://github.com/yourusername/Chima-Rufus.git
+     git clone https://github.com/Esshaan-Mahajan/Chima-Rufus.git
      cd Chima-Rufus
      ```
 
@@ -122,7 +122,7 @@ The structured JSON output from Rufus is designed for seamless integration into 
 1. **Clone the Repository:**
    - Open your terminal and run:
      ```bash
-     git clone https://github.com/yourusername/Chima-Rufus.git
+     git clone https://github.com/Esshaan-Mahajan/Chima-Rufus.git
      cd Chima-Rufus
      ```
 
