@@ -1,4 +1,5 @@
 
+
 import requests
 
 class RufusClient:
@@ -6,7 +7,7 @@ class RufusClient:
         self.api_key = api_key
         self.base_url = base_url
 
-    def scrape(self, start_url, depth=2, keywords="faq,about,contact,services", use_dynamic=False):
+    def scrape(self, start_url, depth=2, keywords="faq,about,contact,services", use_dynamic=False, instructions=""):
         """
         Calls the Rufus /scrape endpoint to crawl the provided URL.
         """
@@ -15,9 +16,9 @@ class RufusClient:
             "depth": depth,
             "keywords": keywords,
             "use_dynamic": use_dynamic,
+            "instructions": instructions,
         }
-        # Optionally, if you want to use the API key, you can pass it in headers:
-        headers = {"Authorization": f"Bearer {self.api_key}"} if self.api_key else {}
+        headers = {"Authorization": f"Bearer {self.api_key}"}
         response = requests.get(f"{self.base_url}/scrape", params=params, headers=headers)
         response.raise_for_status()
         return response.json()
