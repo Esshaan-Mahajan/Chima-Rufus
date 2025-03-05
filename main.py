@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Query, HTTPException
 import uvicorn
-from rufus_output import crawl_website_to_json  # Make sure rufus_output.py is in the same directory
+from rufus_output import crawl_website_to_json  # Ensure rufus_output.py is in the same directory
 
 app = FastAPI(title="Rufus Web Crawler API")
 
@@ -12,16 +12,19 @@ def read_root():
 def scrape(
     start_url: str = Query(..., description="The starting URL to crawl"),
     depth: int = Query(2, description="The depth to crawl (default is 2)"),
-    keywords: str = Query("faq,about,contact,services", description="Comma-separated keywords to filter links")
+    keywords: str = Query("faq,about,contact,services", description="Comma-separated keywords to filter links"),
+    use_dynamic: bool = Query(False, description="Whether to use dynamic content fetching (requires playwright)")
 ):
     """
     Crawl the website starting from `start_url`, follow internal links that include any of the keywords provided,
     and return the scraped content in a structured JSON format.
+    
+    Optionally, enable dynamic content fetching by setting use_dynamic=True.
     """
     # Convert the comma-separated keywords string into a list
     keyword_filters = [kw.strip() for kw in keywords.split(",") if kw.strip()]
     try:
-        data = crawl_website_to_json(start_url, depth=depth, keyword_filters=keyword_filters)
+        data = crawl_website_to_json(start_url, depth=depth, keyword_filters=keyword_filters, use_dynamic=use_dynamic)
         return data
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
